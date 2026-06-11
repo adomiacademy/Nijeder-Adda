@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>আমরা আমরাই - লগইন</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-[#080915] text-white flex items-center justify-center h-screen max-w-md mx-auto border-x border-gray-800">
+
+    <div class="flex flex-col items-center w-full p-6 text-center space-y-6">
+        <div class="w-20 h-20 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center shadow-lg shadow-blue-500/20">
+            <i class="fas fa-users text-white text-3xl"></i>
+        </div>
+        <div>
+            <h1 class="text-2xl font-bold tracking-wide">আমরা আমরাই</h1>
+            <p class="text-sm text-gray-400 mt-2">আমাদের ক্লোজ বন্ধু-বান্ধব ও পরিবারের একান্ত সোশ্যাল নেটওয়ার্ক</p>
+        </div>
+        
+        <button id="login-btn" class="w-full bg-white text-black font-bold py-3 px-4 rounded-full flex items-center justify-center space-x-3 hover:bg-gray-200 transition active:scale-95 shadow-lg mt-4">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" class="w-5 h-5" alt="Google">
+            <span>Google অ্যাকাউন্ট দিয়ে ঢুকুন</span>
+        </button>
+        <p class="text-[11px] text-gray-500">🔒 শুধুমাত্র আমন্ত্রিত মেম্বারদের জন্য সুরক্ষিত।</p>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBbP3sPDO9fIvGC9R0EqR3t6AoWd1bkGNQ",
+            authDomain: "nijeder-adda.firebaseapp.com",
+            projectId: "nijeder-adda",
+            storageBucket: "nijeder-adda.firebasestorage.app",
+            messagingSenderId: "929095493797",
+            appId: "1:929095493797:web:a8d785eb349bfdac6f454c"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) window.location.href = "index.html";
+        });
+
+        document.getElementById('login-btn').addEventListener('click', async () => {
+            try {
+                await signInWithPopup(auth, provider);
+            } catch (error) {
+                alert("লগইন ব্যর্থ হয়েছে! ফায়ারবেস কনসোলে 'Google' অন করা আছে কিনা চেক করুন।");
+                console.error(error);
+            }
+        });
+    </script>
+</body>
+</html>
