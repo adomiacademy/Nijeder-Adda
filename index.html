@@ -3,116 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>আমরা আমরাই - Pro Messenger</title>
+    <title>Amra Amrai Pro | Enterprise Messenger</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <style>
-        body { background: #050505; color: #e4e6eb; font-family: 'Segoe UI', Tahoma, sans-serif; }
-        .glass { background: rgba(24, 25, 26, 0.95); backdrop-filter: blur(10px); }
-        .bubble-me { background: #0084ff; color: white; border-radius: 18px 18px 4px 18px; }
-        .bubble-other { background: #3a3b3c; color: white; border-radius: 18px 18px 18px 4px; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #f3f4f6; }
+        .glass-panel { background: rgba(17, 24, 39, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); }
+        .custom-scroll::-webkit-scrollbar { width: 4px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #374151; border-radius: 10px; }
     </style>
 </head>
-<body class="h-screen flex flex-col items-center justify-center">
+<body class="h-screen flex items-center justify-center">
 
-    <div id="auth" class="glass p-10 rounded-3xl text-center shadow-2xl border border-gray-800">
-        <i class="fa-brands fa-facebook-messenger text-6xl text-blue-500 mb-6"></i>
-        <h1 class="text-3xl font-bold mb-2">আমরা আমরাই</h1>
-        <p class="text-gray-400 mb-8">সবাই সবার সাথে, একদম সুরক্ষিত</p>
-        <button id="login" class="bg-blue-600 hover:bg-blue-700 w-full py-3 rounded-xl font-semibold transition">Google দিয়ে শুরু করুন</button>
+    <div id="auth-screen" class="w-full max-w-sm p-8 glass-panel rounded-3xl shadow-2xl text-center">
+        <div class="w-20 h-20 bg-blue-600 rounded-3xl flex items-center justify-center mx-auto mb-6 rotate-3">
+            <i class="fa-solid fa-comments text-white text-3xl -rotate-3"></i>
+        </div>
+        <h1 class="text-3xl font-bold mb-2">Amra Amrai <span class="text-blue-500">Pro</span></h1>
+        <p class="text-gray-400 mb-8 text-sm">সুরক্ষিত, দ্রুত এবং প্রফেশনাল চ্যাটিং প্ল্যাটফর্ম</p>
+        <button id="google-login" class="w-full bg-white text-black font-semibold py-4 rounded-2xl hover:bg-gray-200 transition flex items-center justify-center gap-3">
+            <i class="fa-brands fa-google"></i> Google দিয়ে লগইন করুন
+        </button>
     </div>
 
-    <div id="app" class="hidden w-full max-w-md h-full flex flex-col bg-[#18191a] shadow-2xl">
-        <header class="p-4 border-b border-gray-700 flex justify-between items-center bg-[#242526]">
-            <h2 id="header" class="font-bold text-lg">গ্রুপ আড্ডা</h2>
-            <button onclick="signOut(auth)" class="text-gray-400"><i class="fa-solid fa-right-from-bracket"></i></button>
+    <div id="app-screen" class="hidden w-full max-w-2xl h-[90vh] glass-panel rounded-3xl overflow-hidden flex flex-col shadow-2xl">
+        <header class="p-6 border-b border-gray-800 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <img id="user-avatar" class="w-12 h-12 rounded-full border-2 border-blue-500" src="" alt="Profile">
+                <div>
+                    <h2 id="user-name" class="font-bold text-lg">---</h2>
+                    <span class="text-xs text-green-500 flex items-center gap-1"><i class="fa-solid fa-circle text-[8px]"></i> অনলাইন</span>
+                </div>
+            </div>
+            <button id="logout-btn" class="text-gray-400 hover:text-red-500 transition"><i class="fa-solid fa-power-off"></i></button>
         </header>
 
-        <nav class="flex p-2 bg-[#242526]">
-            <button id="btn-group" class="flex-1 py-2 rounded-lg bg-gray-700 text-sm font-bold">গ্রুপ</button>
-            <button id="btn-personal" class="flex-1 py-2 rounded-lg text-sm font-bold ml-2">পার্সোনাল</button>
+        <nav class="px-6 py-2 flex gap-4 border-b border-gray-800">
+            <button id="tab-group" class="px-4 py-2 text-sm font-semibold border-b-2 border-blue-500 transition">গ্রুপ চ্যাট</button>
+            <button id="tab-personal" class="px-4 py-2 text-sm font-semibold border-b-2 border-transparent hover:text-blue-400 transition">পার্সোনাল চ্যাট</button>
         </nav>
 
-        <div id="chat-container" class="flex-1 overflow-y-auto p-4 space-y-4"></div>
+        <div id="chat-viewport" class="flex-1 overflow-y-auto p-6 custom-scroll space-y-4"></div>
 
-        <form id="form" class="p-4 glass border-t border-gray-700 flex gap-2">
-            <input id="input" type="text" placeholder="মেসেজ লিখুন..." class="flex-1 bg-gray-800 rounded-full px-4 py-2 outline-none">
-            <button type="submit" class="text-blue-500 text-xl px-2"><i class="fa-solid fa-paper-plane"></i></button>
-        </form>
+        <footer class="p-6 border-t border-gray-800">
+            <form id="msg-form" class="flex gap-4">
+                <input id="msg-input" type="text" class="flex-1 bg-gray-900 border border-gray-700 rounded-2xl px-5 py-3 outline-none focus:border-blue-500 transition" placeholder="মেসেজ লিখুন...">
+                <button type="submit" class="bg-blue-600 px-6 py-3 rounded-2xl font-bold hover:bg-blue-700 transition">পাঠান</button>
+            </form>
+        </footer>
     </div>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, doc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
-        import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-        const firebaseConfig = { apiKey: "AIzaSyBbP3sPDO9fIvGC9R0EqR3t6AoWd1bkGNQ", authDomain: "nijeder-adda.firebaseapp.com", projectId: "nijeder-adda", storageBucket: "nijeder-adda.firebasestorage.app", messagingSenderId: "929095493797", appId: "1:929095493797:web:a8d785eb349bfdac6f454c" };
+        // আপনার দেওয়া কনফিগ
+        const firebaseConfig = {
+            apiKey: "AIzaSyBbP3sPDO9fIvGC9R0EqR3t6AoWd1bkGNQ",
+            authDomain: "nijeder-adda.firebaseapp.com",
+            projectId: "nijeder-adda",
+            storageBucket: "nijeder-adda.firebasestorage.app",
+            messagingSenderId: "929095493797",
+            appId: "1:929095493797:web:a8d785eb349bfdac6f454c",
+            measurementId: "G-J5NLCGJKGY"
+        };
+
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
 
-        let currentUser, currentMode = 'group', chatID = 'global';
-
+        // UI Logic
         onAuthStateChanged(auth, user => {
             if(user) {
-                currentUser = user;
-                document.getElementById('auth').classList.add('hidden');
-                document.getElementById('app').classList.remove('hidden');
-                setDoc(doc(db, "users", user.uid), { name: user.displayName, uid: user.uid }, {merge: true});
+                document.getElementById('auth-screen').classList.add('hidden');
+                document.getElementById('app-screen').classList.remove('hidden');
+                document.getElementById('user-name').innerText = user.displayName;
+                document.getElementById('user-avatar').src = user.photoURL;
                 loadMessages();
             } else {
-                document.getElementById('auth').classList.remove('hidden');
-                document.getElementById('app').classList.add('hidden');
+                document.getElementById('auth-screen').classList.remove('hidden');
+                document.getElementById('app-screen').classList.add('hidden');
             }
         });
 
-        document.getElementById('login').onclick = () => signInWithPopup(auth, provider);
+        document.getElementById('google-login').onclick = () => signInWithPopup(auth, provider);
+        document.getElementById('logout-btn').onclick = () => signOut(auth);
 
-        // UI Logic
-        document.getElementById('btn-group').onclick = () => { currentMode='group'; loadMessages(); };
-        document.getElementById('btn-personal').onclick = () => { currentMode='list'; renderUsers(); };
+        // Message Logic
+        document.getElementById('msg-form').onsubmit = async (e) => {
+            e.preventDefault();
+            const input = document.getElementById('msg-input');
+            if(!input.value) return;
+            await addDoc(collection(db, "global_chat"), {
+                text: input.value,
+                sender: auth.currentUser.displayName,
+                timestamp: serverTimestamp()
+            });
+            input.value = '';
+        };
 
         function loadMessages() {
-            document.getElementById('header').innerText = "গ্রুপ আড্ডা";
-            const q = query(collection(db, "messages", chatID, "chats"), orderBy("time"));
-            onSnapshot(q, snap => {
+            onSnapshot(query(collection(db, "global_chat"), orderBy("timestamp")), snap => {
                 let html = '';
                 snap.forEach(d => {
                     const msg = d.data();
-                    html += `<div class="${msg.uid === currentUser.uid ? 'text-right' : 'text-left'}">
-                                <div class="inline-block p-3 ${msg.uid === currentUser.uid ? 'bubble-me' : 'bubble-other'} text-sm">${msg.text}</div>
-                             </div>`;
+                    html += `
+                        <div class="flex gap-3">
+                            <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-[10px] font-bold">${msg.sender.charAt(0)}</div>
+                            <div class="bg-gray-800 p-3 rounded-2xl rounded-tl-none max-w-[80%]">
+                                <p class="text-[10px] text-blue-400 font-bold mb-1">${msg.sender}</p>
+                                <p class="text-sm">${msg.text}</p>
+                            </div>
+                        </div>`;
                 });
-                document.getElementById('chat-container').innerHTML = html;
+                document.getElementById('chat-viewport').innerHTML = html;
             });
         }
-
-        async function renderUsers() {
-            document.getElementById('header').innerText = "বন্ধুরা";
-            const snap = await getDocs(collection(db, "users"));
-            let html = '<div class="space-y-2">';
-            snap.forEach(d => {
-                const u = d.data();
-                if(u.uid !== currentUser.uid) {
-                    html += `<div class="p-3 bg-[#242526] rounded-xl flex justify-between items-center">
-                                <span>${u.name}</span>
-                                <button onclick="alert('কানেকশন রিকোয়েস্ট সফল!')" class="text-blue-500 font-bold text-xs">Connect</button>
-                             </div>`;
-                }
-            });
-            document.getElementById('chat-container').innerHTML = html + '</div>';
-        }
-
-        document.getElementById('form').onsubmit = async (e) => {
-            e.preventDefault();
-            const text = document.getElementById('input').value;
-            if(!text) return;
-            await addDoc(collection(db, "messages", chatID, "chats"), { text, uid: currentUser.uid, time: new Date() });
-            document.getElementById('input').value = '';
-        };
-
-        window.signOut = signOut;
     </script>
 </body>
 </html>
