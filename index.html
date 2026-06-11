@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>আমরা আমরাই - আড্ডা জোন</title>
+    <title>আমরা আমরাই - মেসেঞ্জার</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -27,12 +27,12 @@
 <body class="flex flex-col h-screen max-w-md mx-auto border-x border-gray-800">
 
     <div id="login-screen" class="flex flex-col items-center justify-center flex-1 p-6 text-center space-y-6">
-        <div class="w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg shadow-purple-500/20">
-            <i class="fas fa-users text-white text-3xl"></i>
+        <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg shadow-blue-500/20">
+            <i class="fab fa-facebook-messenger text-white text-4xl"></i>
         </div>
         <div>
             <h1 class="text-2xl font-bold tracking-wide text-white">আমরা আমরাই</h1>
-            <p class="text-sm text-gray-400 mt-2">আমাদের ক্লোজ বন্ধু-বান্ধব ও পরিবারের একান্ত আড্ডার জায়গা</p>
+            <p class="text-sm text-gray-400 mt-2">আমাদের ক্লোজ বন্ধু-বান্ধব ও পরিবারের একান্ত মেসেঞ্জার আড্ডা</p>
         </div>
         
         <button id="login-btn" class="w-full bg-white text-black font-bold py-3 px-4 rounded-full flex items-center justify-center space-x-3 hover:bg-gray-200 transition active:scale-95 shadow-lg">
@@ -44,33 +44,33 @@
 
     <div id="chat-interface" class="flex flex-col h-full hidden">
         <header class="flex items-center justify-between p-4 bg-[#0d0e1b] border-b border-gray-800 sticky top-0 z-50">
-            <div class="flex items-center space-x-2">
-                <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                    <i class="fas fa-users text-white text-xs"></i>
+            <div class="flex items-center space-x-3">
+                <div class="w-9 h-9 bg-gradient-to-tr from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                    <i class="fab fa-facebook-messenger text-white text-sm"></i>
                 </div>
                 <div>
-                    <h1 class="text-md font-bold tracking-wide">আমরা আমরাই</h1>
-                    <p class="text-[10px] text-green-400"><i class="fas fa-circle text-[8px]"></i> নিওন আড্ডা লাইভ</p>
+                    <h1 class="text-sm font-bold tracking-wide">আমরা আমরাই আড্ডা</h1>
+                    <p class="text-[10px] text-green-400"><i class="fas fa-circle text-[8px]"></i> গ্রুপ লাইভ</p>
                 </div>
             </div>
             <div class="flex items-center space-x-4 text-gray-400">
                 <button onclick="location.reload()"><i class="fas fa-sync-alt hover:text-white"></i></button>
-                <button id="logout-btn" title="Log Out" class="hover:text-red-400"><i class="fas fa-sign-out-alt"></i></button>
+                <button id="logout-btn" title="Log Out" class="hover:text-red-400 text-sm"><i class="fas fa-sign-out-alt"></i></button>
             </div>
         </header>
 
-        <main id="chat-box" class="flex-1 overflow-y-auto p-4 space-y-4 no-scrollbar">
+        <main id="chat-box" class="flex-1 overflow-y-auto p-4 space-y-3 no-scrollbar bg-[#080915]">
             <div class="text-center text-gray-500 text-xs my-4">
-                🔒 এখানে শুধু আমাদের মেম্বাররাই আছেন।
+                🔒 এখানে আমাদের মেম্বার ছাড়া বাইরের কেউ নেই।
             </div>
         </main>
 
         <footer class="p-3 bg-[#0d0e1b] border-t border-gray-800 sticky bottom-0">
             <form id="message-form" class="flex items-center space-x-2">
-                <input type="text" id="message-input" placeholder="গ্রুপে কিছু লিখুন..." autocomplete="off" required
-                    class="flex-1 bg-[#111223] text-sm text-white rounded-full px-4 py-2.5 focus:outline-none focus:ring-1 focus:ring-purple-500 border border-gray-800">
+                <input type="text" id="message-input" placeholder="মেসেজ লিখুন..." autocomplete="off" required
+                    class="flex-1 bg-[#111223] text-sm text-white rounded-full px-4 py-2.5 focus:outline-none focus:ring-1 focus:ring-blue-500 border border-gray-800">
                 
-                <button type="submit" class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center hover:bg-purple-700 transition active:scale-95">
+                <button type="submit" class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition active:scale-95">
                     <i class="fas fa-paper-plane text-white text-sm"></i>
                 </button>
             </form>
@@ -128,7 +128,7 @@
             try {
                 await signInWithPopup(auth, provider);
             } catch (error) {
-                alert("লগইন করতে সমস্যা হয়েছে! আবার চেষ্টা করুন।");
+                alert("লগইন করতে সমস্যা হয়েছে! ফায়ারবেস কনসোলে Google অপশনটি Enable করা আছে কিনা চেক করুন।");
                 console.error(error);
             }
         });
@@ -148,4 +148,50 @@
 
             try {
                 await addDoc(collection(db, "amra_amrai_messages"), {
-                    senderName: currentUser.displayName
+                    senderName: currentUser.displayName || "পরিচিত মুখ",
+                    senderEmail: currentUser.email,
+                    senderPhoto: currentUser.photoURL || "https://via.placeholder.com/150",
+                    messageText: text,
+                    timestamp: serverTimestamp()
+                });
+                messageInput.value = ''; 
+            } catch (error) {
+                console.error("Error sending message: ", error);
+            }
+        });
+
+        // রিয়েল-টাইমে চ্যাট লোড করা
+        function loadMessages() {
+            const q = query(collection(db, "amra_amrai_messages"), orderBy("timestamp", "asc"));
+            
+            onSnapshot(q, (snapshot) => {
+                chatBox.innerHTML = '<div class="text-center text-gray-500 text-xs my-4">🔒 এখানে আমাদের মেম্বার ছাড়া বাইরের কেউ নেই।</div>';
+                
+                snapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const isMe = data.senderEmail === currentUser.email;
+
+                    const messageElement = document.createElement('div');
+                    messageElement.className = `flex ${isMe ? 'justify-end' : 'justify-start'} mb-2 items-end space-x-2`;
+
+                    // মেসেঞ্জার বাবল স্টাইল লেআউট
+                    const messageContent = `
+                        ${!isMe ? `<img src="${data.senderPhoto || 'https://via.placeholder.com/150'}" class="w-6 h-6 rounded-full border border-gray-700 shadow-sm">` : ''}
+                        <div class="max-w-[75%]">
+                            ${!isMe ? `<p class="text-[9px] text-gray-500 ml-1 mb-0.5">${data.senderName}</p>` : ''}
+                            <div class="px-3 py-1.5 text-sm rounded-2xl ${isMe ? 'bg-blue-600 text-white rounded-br-none' : 'bg-gray-800 text-gray-200 rounded-bl-none'}">
+                                ${data.messageText}
+                            </div>
+                        </div>
+                    `;
+
+                    messageElement.innerHTML = messageContent;
+                    chatBox.appendChild(messageElement);
+                });
+
+                chatBox.scrollTop = chatBox.scrollHeight;
+            });
+        }
+    </script>
+</body>
+</html>
