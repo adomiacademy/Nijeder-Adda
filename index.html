@@ -7,24 +7,23 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <link rel="manifest" href="manifest.json">
     <style>
-        body { background-color: #0b0c16; color: white; font-family: 'Segoe UI', Roboto, sans-serif; }
+        body { background-color: #090a14; color: white; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .chat-bubble { max-width: 75%; padding: 10px 14px; font-size: 14px; border-radius: 18px; line-height: 1.4; }
     </style>
 </head>
-<body class="flex flex-col h-screen max-w-md mx-auto border-x border-gray-800 bg-[#0b0c16]">
+<body class="flex flex-col h-screen max-w-md mx-auto border-x border-gray-800 bg-[#090a14]">
 
     <div id="login-screen" class="flex flex-col items-center justify-center flex-1 p-6 text-center space-y-6">
-        <div class="w-20 h-20 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-xl shadow-blue-500/20 rotate-12">
+        <div class="w-20 h-20 bg-blue-600 rounded-2xl flex items-center justify-center shadow-xl shadow-blue-500/20 rotate-12">
             <i class="fab fa-facebook-messenger text-white text-4xl -rotate-12"></i>
         </div>
         <div>
-            <h1 class="text-3xl font-extrabold tracking-wide text-white bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">আমরা আমরাই</h1>
-            <p class="text-xs text-gray-400 mt-2 px-4">গ্রুপ আড্ডা এবং পার্সোনাল ইনবক্সসহ আমাদের নিজস্ব গোপন নেটওয়ার্ক</p>
+            <h1 class="text-3xl font-extrabold tracking-wide text-white">আমরা আমরাই</h1>
+            <p class="text-xs text-gray-400 mt-2 px-4">গ্রুপ আড্ডা এবং পার্সোনাল ইনবক্সসহ আমাদের নিজস্ব মেসেঞ্জার নেটওয়ার্ক</p>
         </div>
-        
         <button id="login-btn" class="w-full bg-white text-black font-bold py-3.5 px-4 rounded-xl flex items-center justify-center space-x-3 hover:bg-gray-200 transition active:scale-95 shadow-lg text-sm">
             <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" class="w-5 h-5" alt="Google">
             <span>Google অ্যাকাউন্ট দিয়ে প্রবেশ করুন</span>
@@ -33,56 +32,58 @@
 
     <div id="main-interface" class="flex flex-col h-full hidden">
         
-        <header class="flex items-center justify-between p-4 bg-[#111324] border-b border-gray-800/80 sticky top-0 z-50">
+        <header class="flex items-center justify-between p-4 bg-[#111324] border-b border-gray-800/60 sticky top-0 z-50">
             <div class="flex items-center space-x-3">
-                <img id="my-avatar" src="" class="w-9 h-9 rounded-full border-2 border-blue-500 shadow-sm">
+                <img id="my-avatar" src="https://via.placeholder.com/150" class="w-9 h-9 rounded-full border border-blue-500 shadow-sm">
                 <div>
-                    <h1 id="header-title" class="text-sm font-bold tracking-wide">গ্রুপ আড্ডা জোন</h1>
-                    <p class="text-[10px] text-green-400"><i class="fas fa-circle text-[7px] mr-1"></i>অনলাইন</p>
+                    <h1 id="header-title" class="text-sm font-bold tracking-wide">গ্রুপ চ্যাটিং</h1>
+                    <p class="text-[10px] text-green-400"><i class="fas fa-circle text-[7px] mr-1"></i>গ্রুপ লাইভ</p>
                 </div>
             </div>
             <div class="flex items-center space-x-3 text-gray-400">
-                <button id="back-to-list-btn" class="hidden text-sm bg-gray-800 px-2.5 py-1 rounded-lg text-gray-200"><i class="fas fa-chevron-left mr-1"></i>লিস্ট</button>
-                <button id="logout-btn" class="text-red-400 hover:text-red-300 text-sm p-1"><i class="fas fa-sign-out-alt"></i></button>
+                <button id="back-to-list-btn" class="hidden text-xs bg-gray-800 px-3 py-1.5 rounded-lg text-gray-200 font-medium"><i class="fas fa-chevron-left mr-1"></i>লিস্ট</button>
+                <button id="logout-btn" class="text-red-400 hover:text-red-300 text-sm p-1" title="Log Out"><i class="fas fa-sign-out-alt"></i></button>
             </div>
         </header>
 
-        <div id="nav-tabs" class="flex bg-[#111324] border-b border-gray-800 text-center text-xs font-semibold">
-            <button id="tab-group" class="flex-1 py-3 text-blue-400 border-b-2 border-blue-500 flex items-center justify-center space-x-2">
-                <i class="fas fa-users text-sm"></i> <span>গ্রুপ আড্ডা</span>
+        <div id="nav-tabs" class="flex bg-[#111324] border-b border-gray-800 text-center text-xs font-bold">
+            <button id="tab-group" class="flex-1 py-3.5 text-blue-400 border-b-2 border-blue-500 flex items-center justify-center space-x-2">
+                <i class="fas fa-users text-sm"></i> <span>গ্রুপ চ্যাটিং</span>
             </button>
-            <button id="tab-personal" class="flex-1 py-3 text-gray-400 border-b-2 border-transparent hover:text-white flex items-center justify-center space-x-2">
-                <i class="fas fa-user text-sm"></i> <span>পার্সোনাল ইনবক্স</span>
+            <button id="tab-personal" class="flex-1 py-3.5 text-gray-400 border-b-2 border-transparent hover:text-white flex items-center justify-center space-x-2">
+                <i class="fas fa-user-friends text-sm"></i> <span>পার্সোনাল চ্যাট</span>
             </button>
         </div>
 
-        <div class="flex-1 flex flex-col overflow-hidden relative">
+        <div class="flex-grow flex flex-col overflow-hidden relative">
             
-            <main id="group-chat-box" class="flex-1 overflow-y-auto p-4 space-y-3 no-scrollbar bg-[#0b0c16]">
-                <div class="text-center text-gray-500 text-[11px] my-2">🔒 এই গ্রুপে সবাই একসাথে যুক্ত আছেন।</div>
+            <main id="group-chat-box" class="flex-grow overflow-y-auto p-4 space-y-3 no-scrollbar bg-[#090a14]">
+                <div class="text-center text-gray-500 text-[11px] my-2">🔒 এখানে যে কেউ সরাসরি মেসেজ করতে পারবেন।</div>
             </main>
 
-            <main id="personal-list-box" class="flex-1 overflow-y-auto p-4 space-y-4 no-scrollbar bg-[#0b0c16] hidden">
+            <main id="personal-list-box" class="flex-grow overflow-y-auto p-4 space-y-4 no-scrollbar bg-[#090a14] hidden">
                 <div>
-                    <h3 class="text-xs font-bold text-gray-400 mb-2 tracking-wider uppercase">কানেকশন রিকোয়েস্ট</h3>
-                    <div id="request-list" class="space-y-2"></div>
+                    <h3 class="text-[11px] font-bold text-gray-500 mb-2 tracking-wider uppercase">আগত ফ্রেন্ড রিকোয়েস্ট</h3>
+                    <div id="request-list" class="space-y-2">
+                        </div>
                 </div>
                 <div class="pt-2">
-                    <h3 class="text-xs font-bold text-gray-400 mb-2 tracking-wider uppercase">সব মেম্বার ও বন্ধু তালিকা</h3>
-                    <div id="users-list" class="space-y-2"></div>
+                    <h3 class="text-[11px] font-bold text-gray-500 mb-2 tracking-wider uppercase">সব মেম্বার ও বন্ধুতালিকা</h3>
+                    <div id="users-list" class="space-y-2">
+                        </div>
                 </div>
             </main>
 
-            <main id="personal-chat-box" class="flex-1 overflow-y-auto p-4 space-y-3 no-scrollbar bg-[#0b0c16] hidden">
+            <main id="personal-chat-box" class="flex-grow overflow-y-auto p-4 space-y-3 no-scrollbar bg-[#090a14] hidden">
                 </main>
 
         </div>
 
-        <footer id="chat-footer" class="p-3 bg-[#111324] border-t border-gray-800 sticky bottom-0">
+        <footer id="chat-footer" class="p-3 bg-[#111324] border-t border-gray-800/80 sticky bottom-0">
             <form id="message-form" class="flex items-center space-x-2">
                 <input type="text" id="message-input" placeholder="মেসেজ লিখুন..." autocomplete="off" required
-                    class="flex-1 bg-[#17192f] text-sm text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-1 focus:ring-blue-500 border border-gray-800/60">
-                <button type="submit" class="w-11 h-11 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-xl flex items-center justify-center hover:opacity-90 transition active:scale-95 shadow-md">
+                    class="flex-1 bg-[#17192f] text-sm text-white rounded-full px-4 py-3 focus:outline-none focus:ring-1 focus:ring-blue-500 border border-gray-800">
+                <button type="submit" class="w-11 h-11 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition active:scale-95 shadow-md">
                     <i class="fas fa-paper-plane text-white text-sm"></i>
                 </button>
             </form>
@@ -92,9 +93,10 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, doc, setDoc, getDocs, where, updateDoc } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, doc, setDoc, getDocs, updateDoc } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
         import { getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
 
+        // আপনার অরিজিনাল ফায়ারবেস কনফিগারেশন
         const firebaseConfig = {
             apiKey: "AIzaSyBbP3sPDO9fIvGC9R0EqR3t6AoWd1bkGNQ",
             authDomain: "nijeder-adda.firebaseapp.com",
@@ -109,7 +111,7 @@
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
 
-        // UI Elements
+        // DOM এলিমেন্টসমূহ
         const loginScreen = document.getElementById('login-screen');
         const mainInterface = document.getElementById('main-interface');
         const groupChatBox = document.getElementById('group-chat-box');
@@ -120,75 +122,75 @@
         const headerTitle = document.getElementById('header-title');
         const backBtn = document.getElementById('back-to-list-btn');
         const chatFooter = document.getElementById('chat-footer');
+        const navTabs = document.getElementById('nav-tabs');
 
         let currentUser = null;
-        let currentActiveMode = 'group'; // group, list, personal_chat
-        let currentChatTargetUID = null;
-        let currentChatRoomID = null;
+        let activeView = 'group'; // group, list, personal_chat
+        let currentRoomID = null;
         let unsubGroup = null, unsubPersonal = null;
 
-        // অথেনটিকেশন চেক
+        // ইউজার লগইন স্টেট লিসেনার
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 currentUser = user;
                 document.getElementById('my-avatar').src = user.photoURL || "https://via.placeholder.com/150";
                 
-                // ইউজার প্রোফাইল ডাটাবেসে সেভ/আপডেট করা
+                // ডাটাবেসে ইউজার প্রোফাইল ডাটা সেভ/আপডেট করা
                 await setDoc(doc(db, "users", user.uid), {
                     uid: user.uid,
                     name: user.displayName,
-                    email: user.email,
                     photo: user.photoURL,
-                    lastSeen: serverTimestamp()
+                    email: user.email
                 }, { merge: true });
 
                 loginScreen.classList.add('hidden');
                 mainInterface.classList.remove('hidden');
-                switchMode('group');
+                switchView('group');
             } else {
                 loginScreen.classList.remove('hidden');
                 mainInterface.classList.add('hidden');
             }
         });
 
-        // গুগল লগইন ও লগআউট
-        document.getElementById('login-btn').addEventListener('click', () => signInWithPopup(auth, provider).catch(e => alert(e.message)));
+        // লগইন ও লগআউট ইভেন্ট
+        document.getElementById('login-btn').addEventListener('click', () => signInWithPopup(auth, provider));
         document.getElementById('logout-btn').addEventListener('click', () => confirm("লগআউট করতে চান?") && signOut(auth));
 
-        // ট্যাব সুইচ লজিক
-        document.getElementById('tab-group').addEventListener('click', () => switchMode('group'));
-        document.getElementById('tab-personal').addEventListener('click', () => switchMode('list'));
-        backBtn.addEventListener('click', () => switchMode('list'));
+        // ট্যাব সুইচিং ক্লিক ইভেন্ট
+        document.getElementById('tab-group').addEventListener('click', () => switchView('group'));
+        document.getElementById('tab-personal').addEventListener('click', () => switchView('list'));
+        backBtn.addEventListener('click', () => switchView('list'));
 
-        function switchMode(mode) {
-            currentActiveMode = mode;
-            document.getElementById('nav-tabs').classList.remove('hidden');
+        // স্ক্রিন ভিউ কন্ট্রোলার ফাংশন
+        function switchView(view) {
+            activeView = view;
+            navTabs.classList.remove('hidden');
             backBtn.classList.add('hidden');
             chatFooter.classList.remove('hidden');
 
-            if(mode === 'group') {
-                headerTitle.innerText = "গ্রুপ আড্ডা জোন";
+            if(view === 'group') {
+                headerTitle.innerText = "গ্রুপ চ্যাটিং";
                 groupChatBox.classList.remove('hidden');
                 personalListBox.classList.add('hidden');
                 personalChatBox.classList.add('hidden');
                 
-                document.getElementById('tab-group').className = "flex-1 py-3 text-blue-400 border-b-2 border-blue-500 flex items-center justify-center space-x-2";
-                document.getElementById('tab-personal').className = "flex-1 py-3 text-gray-400 border-b-2 border-transparent flex items-center justify-center space-x-2";
+                document.getElementById('tab-group').className = "flex-1 py-3.5 text-blue-400 border-b-2 border-blue-500 flex items-center justify-center space-x-2";
+                document.getElementById('tab-personal').className = "flex-1 py-3.5 text-gray-400 border-b-2 border-transparent flex items-center justify-center space-x-2";
                 loadGroupMessages();
             } 
-            else if(mode === 'list') {
-                headerTitle.innerText = "পার্সোনাল ইনবক্স";
+            else if(view === 'list') {
+                headerTitle.innerText = "পার্সোনাল চ্যাট";
                 groupChatBox.classList.add('hidden');
                 personalListBox.classList.remove('hidden');
                 personalChatBox.classList.add('hidden');
-                chatFooter.classList.add('hidden'); // লিস্টে মেসেজ বার লাগবে না
+                chatFooter.classList.add('hidden'); // লিস্ট স্ক্রিনে টাইপিং বার থাকবে না
                 
-                document.getElementById('tab-personal').className = "flex-1 py-3 text-blue-400 border-b-2 border-blue-500 flex items-center justify-center space-x-2";
-                document.getElementById('tab-group').className = "flex-1 py-3 text-gray-400 border-b-2 border-transparent flex items-center justify-center space-x-2";
-                loadUsersAndConnections();
+                document.getElementById('tab-personal').className = "flex-1 py-3.5 text-blue-400 border-b-2 border-blue-500 flex items-center justify-center space-x-2";
+                document.getElementById('tab-group').className = "flex-1 py-3.5 text-gray-400 border-b-2 border-transparent flex items-center justify-center space-x-2";
+                loadDirectory();
             }
-            else if(mode === 'personal_chat') {
-                document.getElementById('nav-tabs').classList.add('hidden'); // চ্যাটের সময় ট্যাব হাইড
+            else if(view === 'personal_chat') {
+                navTabs.classList.add('hidden'); // চ্যাট করার সময় নিচের ট্যাব লক থাকবে
                 backBtn.classList.remove('hidden');
                 personalListBox.classList.add('hidden');
                 personalChatBox.classList.remove('hidden');
@@ -196,138 +198,151 @@
             }
         }
 
-        // মেসেজ পাঠানো (কমন হ্যান্ডলার)
+        // মেসেজ সাবমিট হ্যান্ডলার (গ্রুপ এবং পার্সোনাল দুইটার জন্যই একই ফর্ম)
         messageForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const text = messageInput.value.trim();
             if (!text || !currentUser) return;
 
-            if (currentActiveMode === 'group') {
+            if (activeView === 'group') {
                 await addDoc(collection(db, "group_messages"), {
                     senderName: currentUser.displayName, senderEmail: currentUser.email, senderPhoto: currentUser.photoURL,
                     messageText: text, timestamp: serverTimestamp()
                 });
-            } else if (currentActiveMode === 'personal_chat' && currentChatRoomID) {
-                await addDoc(collection(db, "personal_rooms", currentChatRoomID, "messages"), {
+            } else if (activeView === 'personal_chat' && currentRoomID) {
+                await addDoc(collection(db, "personal_messages", currentRoomID, "chats"), {
                     senderUID: currentUser.uid, messageText: text, timestamp: serverTimestamp()
                 });
             }
             messageInput.value = '';
         });
 
-        // ১. গ্রুপ মেসেজ লোড
+        // ১. রিয়েল-টাইম গ্রুপ মেসেজ লোড (Fast Firestore Sync)
         function loadGroupMessages() {
-            if (unsubGroup) return;
+            if (unsubGroup) return; // অলরেডি লিসেন করা থাকলে দরকার নেই
             const q = query(collection(db, "group_messages"), orderBy("timestamp", "asc"));
             unsubGroup = onSnapshot(q, (snapshot) => {
-                groupChatBox.innerHTML = '<div class="text-center text-gray-500 text-[11px] my-2">🔒 এই গ্রুপে সবাই একসাথে যুক্ত আছেন।</div>';
-                snapshot.forEach(doc => renderMessageBubble(groupChatBox, doc.data(), doc.data().senderEmail === currentUser.email, doc.data().senderName, doc.data().senderPhoto));
+                groupChatBox.innerHTML = '<div class="text-center text-gray-500 text-[11px] my-2">🔒 এখানে যে কেউ সরাসরি মেসেজ করতে পারবেন।</div>';
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    renderBubble(groupChatBox, data.messageText, data.senderEmail === currentUser.email, data.senderName, data.senderPhoto);
+                });
                 groupChatBox.scrollTop = groupChatBox.scrollHeight;
             });
         }
 
-        // ২. ইউজার ও কানেকশন রুলস লোড
-        function loadUsersAndConnections() {
-            // সমস্ত মেম্বার ও কানেকশন লাইভ ট্র্যাক করা
-            onSnapshot(collection(db, "users"), async (userSnap) => {
+        // ২. ডিরেক্টরি লোড: অল মেম্বার শো করা, রিকুয়েস্ট পাঠানো ও অ্যাকশন হ্যান্ডেল করা
+        function loadDirectory() {
+            onSnapshot(collection(db, "users"), async (userSnapshot) => {
                 const usersList = document.getElementById('users-list');
-                const reqList = document.getElementById('request-list');
-                usersList.innerHTML = ''; reqList.innerHTML = '';
+                const requestList = document.getElementById('request-list');
+                usersList.innerHTML = ''; requestList.innerHTML = '';
 
-                // কানেকশন ডেটা নামানো
-                const connSnap = await getDocs(collection(db, "connections"));
-                let conns = {};
-                connSnap.forEach(d => { conns[d.id] = d.data(); });
+                // সমস্ত কানেকশন স্ট্যাটাস একবারে ডাটাবেস থেকে রিড করা (স্লোনেস দূর করার জন্য)
+                const connSnapshot = await getDocs(collection(db, "connections"));
+                let activeConnections = {};
+                connSnapshot.forEach(d => { activeConnections[d.id] = d.data(); });
 
-                userSnap.forEach(uDoc => {
+                userSnapshot.forEach(uDoc => {
                     const user = uDoc.data();
-                    if (user.uid === currentUser.uid) return; // নিজের নাম লিস্টে দেখাবে না
+                    if (user.uid === currentUser.uid) return; // নিজের প্রোফাইল নিজেকে দেখাবে না
 
-                    // ইউনিক কানেকশন আইডি তৈরি (কার আইডি বড় তার ওপর ভিত্তি করে)
+                    // দুটি ইউজারের মধ্যে ইউনিক রিলেশন আইডি জেনারেট করা
                     const connID = currentUser.uid < user.uid ? `${currentUser.uid}_${user.uid}` : `${user.uid}_${currentUser.uid}`;
-                    const connData = conns[connID];
+                    const connection = activeConnections[connID];
 
-                    let btnHTML = '';
-                    if (!connData) {
-                        btnHTML = `<button onclick="sendRequest('${user.uid}')" class="bg-blue-600 text-xs px-3 py-1.5 rounded-lg font-bold">Connect</button>`;
-                    } else if (connData.status === 'pending') {
-                        if (connData.senderId === currentUser.uid) {
-                            btnHTML = `<span class="text-xs text-gray-500 bg-gray-800 px-2 py-1 rounded">Pending</span>`;
+                    let actionButton = '';
+
+                    if (!connection) {
+                        // কোনো রিকোয়েস্ট পাঠানো হয়নি এখনো
+                        actionButton = `<button onclick="sendConnectRequest('${user.uid}')" class="bg-blue-600 text-xs font-bold px-3 py-1.5 rounded-lg active:scale-95 transition">Connect</button>`;
+                    } else if (connection.status === 'pending') {
+                        if (connection.senderId === currentUser.uid) {
+                            actionButton = `<span class="text-xs text-gray-500 bg-gray-800/80 px-2.5 py-1.5 rounded-lg">Sent</span>`;
                         } else {
-                            // রিকোয়েস্ট এসেছে, একসেপ্ট বাটন স্ক্রিনের ওপরে যাবে
-                            reqList.innerHTML += `
-                                <div class="flex items-center justify-between p-3 bg-[#111324] rounded-xl border border-gray-800">
+                            // রিকোয়েস্ট এসেছে, এটি ওপরের আগত রিকোয়েস্ট তালিকায় পুশ হবে
+                            requestList.innerHTML += `
+                                <div class="flex items-center justify-between p-3 bg-[#111324] border border-gray-800 rounded-xl">
                                     <div class="flex items-center space-x-3">
-                                        <img src="${user.photo}" class="w-8 h-8 rounded-full">
-                                        <span class="text-sm font-semibold">${user.name}</span>
+                                        <img src="${user.photo || 'https://via.placeholder.com/150'}" class="w-8 h-8 rounded-full border border-gray-700">
+                                        <span class="text-sm font-semibold text-white">${user.name}</span>
                                     </div>
-                                    <button onclick="acceptRequest('${connID}')" class="bg-green-600 text-xs px-3 py-1.5 rounded-lg font-bold">Accept</button>
+                                    <button onclick="acceptConnectRequest('${connID}')" class="bg-green-600 text-xs font-bold px-3 py-1.5 rounded-lg active:scale-95 transition">Accept</button>
                                 </div>`;
-                            return;
+                            return; // মেইন লিস্টে এটি আর দেখানোর দরকার নেই আলাদাভাবে
                         }
-                    } else if (connData.status === 'connected') {
-                        btnHTML = `<button onclick="openPersonalChat('${user.uid}', '${user.name}', '${connID}')" class="bg-purple-600 text-xs px-3 py-1.5 rounded-lg font-bold"><i class="fas fa-comment"></i> Chat</button>`;
+                    } else if (connection.status === 'connected') {
+                        // কানেকশন সাকসেসফুল, মেসেঞ্জার চ্যাট বাটন একটিভ হবে
+                        actionButton = `<button onclick="startPersonalChat('${user.uid}', '${user.name}', '${connID}')" class="bg-[#a855f7] text-xs font-bold px-3 py-1.5 rounded-lg flex items-center space-x-1 active:scale-95 transition"><i class="fas fa-comment"></i> <span>Chat</span></button>`;
                     }
 
+                    // মেইন মেম্বার তালিকা রেন্ডার
                     usersList.innerHTML += `
-                        <div class="flex items-center justify-between p-3 bg-[#111324]/50 rounded-xl border border-gray-800/60">
+                        <div class="flex items-center justify-between p-3 bg-[#111324]/40 border border-gray-800/60 rounded-xl">
                             <div class="flex items-center space-x-3">
-                                <img src="${user.photo}" class="w-8 h-8 rounded-full">
-                                <span class="text-sm font-medium">${user.name}</span>
+                                <img src="${user.photo || 'https://via.placeholder.com/150'}" class="w-8 h-8 rounded-full border border-gray-700">
+                                <span class="text-sm font-medium text-gray-200">${user.name}</span>
                             </div>
-                            <div>${btnHTML}</div>
+                            <div>${actionButton}</div>
                         </div>`;
                 });
 
-                if(reqList.innerHTML === '') reqList.innerHTML = '<p class="text-xs text-gray-600 pl-1">কোনো রিকোয়েস্ট নেই</p>';
+                if(requestList.innerHTML === '') {
+                    requestList.innerHTML = '<p class="text-xs text-gray-600 pl-1 italic">কোনো নতুন রিকোয়েস্ট নেই</p>';
+                }
             });
         }
 
-        // ৩. পার্সোনাল চ্যাট উইন্ডো ওপেন
-        window.openPersonalChat = function(targetUID, targetName, roomID) {
-            currentChatTargetUID = targetUID;
-            currentChatRoomID = roomID;
+        // ৩. রিকুয়েস্ট পাঠানো (Connect অ্যাকশন)
+        window.sendConnectRequest = async function(targetUID) {
+            const connID = currentUser.uid < targetUID ? `${currentUser.uid}_${targetUID}` : `${targetUID}_${currentUser.uid}`;
+            await setDoc(doc(db, "connections", connID), {
+                id: connID,
+                senderId: currentUser.uid,
+                receiverId: targetUID,
+                status: 'pending'
+            });
+        };
+
+        // 8. রিকুয়েস্ট একসেপ্ট করা (Accept অ্যাকশন)
+        window.acceptConnectRequest = async function(connID) {
+            await updateDoc(doc(db, "connections", connID), { status: 'connected' });
+            loadDirectory();
+        };
+
+        // ৫. ওয়ান-টু-ওয়ান পার্সোনাল চ্যাট চালু করা
+        window.startPersonalChat = function(targetUID, targetName, roomID) {
+            currentRoomID = roomID;
             headerTitle.innerText = targetName;
-            switchMode('personal_chat');
+            switchView('personal_chat');
 
-            if(unsubPersonal) unsubPersonal(); // আগের লিসেনার রিমুভ করা
+            if (unsubPersonal) unsubPersonal(); // আগের চ্যাট লিসেনার বন্ধ করা
 
-            const q = query(collection(db, "personal_rooms", roomID, "messages"), orderBy("timestamp", "asc"));
+            const q = query(collection(db, "personal_messages", roomID, "chats"), orderBy("timestamp", "asc"));
             unsubPersonal = onSnapshot(q, (snapshot) => {
-                personalChatBox.innerHTML = '<div class="text-center text-gray-500 text-[10px] my-2">🔒 এনক্রিপ্টেড চ্যাট রুম</div>';
+                personalChatBox.innerHTML = '<div class="text-center text-gray-500 text-[10px] my-1 italic">🔒 ব্যক্তিগত মেসেজ সুরক্ষিত ও গোপন</div>';
                 snapshot.forEach(doc => {
                     const data = doc.data();
-                    renderMessageBubble(personalChatBox, data, data.senderUID === currentUser.uid, "", "");
+                    renderBubble(personalChatBox, data.messageText, data.senderUID === currentUser.uid, "", "");
                 });
                 personalChatBox.scrollTop = personalChatBox.scrollHeight;
             });
         }
 
-        // কানেকশন রিকোয়েস্ট ফাংশনসমূহ (গ্লোবাল উইন্ডোতে দেওয়া যেন অন-ক্লিক পায়)
-        window.sendRequest = async function(targetUID) {
-            const connID = currentUser.uid < targetUID ? `${currentUser.uid}_${targetUID}` : `${targetUID}_${currentUser.uid}`;
-            await setDoc(doc(db, "connections", connID), { connID, senderId: currentUser.uid, receiverId: targetUID, status: 'pending' });
-        }
+        // মেসেঞ্জার বাবল মেসেজ জেনারেটর UI
+        function renderBubble(targetBox, text, isMe, name, photo) {
+            const wrapper = document.createElement('div');
+            wrapper.className = `flex ${isMe ? 'justify-end' : 'justify-start'} items-end space-x-2 mb-1`;
 
-        window.acceptRequest = async function(connID) {
-            await updateDoc(doc(db, "connections", connID), { status: 'connected' });
-            loadUsersAndConnections();
-        }
-
-        // বাবল মেসেজ রেন্ডার মেথড (কমন)
-        function renderMessageBubble(boxElement, data, isMe, name, photo) {
-            const msgDiv = document.createElement('div');
-            msgDiv.className = `flex ${isMe ? 'justify-end' : 'justify-start'} items-end space-x-2`;
-            
-            msgDiv.innerHTML = `
+            wrapper.innerHTML = `
                 ${(!isMe && photo) ? `<img src="${photo}" class="w-6 h-6 rounded-full border border-gray-700">` : ''}
                 <div class="max-w-[75%]">
                     ${(!isMe && name) ? `<p class="text-[9px] text-gray-500 ml-1 mb-0.5">${name}</p>` : ''}
-                    <div class="px-3.5 py-2 text-sm rounded-2xl ${isMe ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-br-none' : 'bg-[#1a1c31] text-gray-200 rounded-bl-none'}">
-                        ${data.messageText}
+                    <div class="chat-bubble ${isMe ? 'bg-blue-600 text-white rounded-br-none' : 'bg-[#1b1d30] text-gray-200 rounded-bl-none'}">
+                        ${text}
                     </div>
                 </div>`;
-            boxElement.appendChild(msgDiv);
+            targetBox.appendChild(wrapper);
         }
     </script>
 </body>
