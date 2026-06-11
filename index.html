@@ -82,14 +82,15 @@
         import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
         import { getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
 
-        // ⚠️ আপনার ফায়ারবেস কনফিগারেশনটি এখানে বসিয়ে দিন
+        // আপনার প্রোভাইড করা অরিজিনাল ফায়ারবেস কনফিগারেশন
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_AUTH_DOMAIN",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_STORAGE_BUCKET",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
+            apiKey: "AIzaSyBbP3sPDO9fIvGC9R0EqR3t6AoWd1bkGNQ",
+            authDomain: "nijeder-adda.firebaseapp.com",
+            projectId: "nijeder-adda",
+            storageBucket: "nijeder-adda.firebasestorage.app",
+            messagingSenderId: "929095493797",
+            appId: "1:929095493797:web:a8d785eb349bfdac6f454c",
+            measurementId: "G-J5NLCGJKGY"
         };
 
         // ফায়ারবেস ইনিশিয়েট করা
@@ -147,49 +148,4 @@
 
             try {
                 await addDoc(collection(db, "amra_amrai_messages"), {
-                    senderName: currentUser.displayName || "পরিচিত মুখ",
-                    senderEmail: currentUser.email,
-                    senderPhoto: currentUser.photoURL || "https://via.placeholder.com/150",
-                    messageText: text,
-                    timestamp: serverTimestamp()
-                });
-                messageInput.value = ''; 
-            } catch (error) {
-                console.error("Error sending message: ", error);
-            }
-        });
-
-        // রিয়েল-টাইমে চ্যাট লোড করা
-        function loadMessages() {
-            const q = query(collection(db, "amra_amrai_messages"), orderBy("timestamp", "asc"));
-            
-            onSnapshot(q, (snapshot) => {
-                chatBox.innerHTML = '<div class="text-center text-gray-500 text-xs my-4">🔒 এখানে শুধু আমাদের মেম্বাররাই আছেন।</div>';
-                
-                snapshot.forEach((doc) => {
-                    const data = doc.data();
-                    const isMe = data.senderEmail === currentUser.email;
-
-                    const messageElement = document.createElement('div');
-                    messageElement.className = `flex ${isMe ? 'justify-end' : 'justify-start'} mb-3 items-end space-x-2`;
-
-                    const messageContent = `
-                        ${!isMe ? `<img src="${data.senderPhoto}" class="w-7 h-7 rounded-full border border-gray-700">` : ''}
-                        <div class="max-w-[75%]">
-                            ${!isMe ? `<p class="text-[10px] text-gray-400 ml-1 mb-0.5">${data.senderName}</p>` : ''}
-                            <div class="px-3.5 py-2 text-sm rounded-2xl ${isMe ? 'bg-purple-600 text-white rounded-br-none' : 'bg-[#1c1d35] text-gray-200 rounded-bl-none'}">
-                                ${data.messageText}
-                            </div>
-                        </div>
-                    `;
-
-                    messageElement.innerHTML = messageContent;
-                    chatBox.appendChild(messageElement);
-                });
-
-                chatBox.scrollTop = chatBox.scrollHeight;
-            });
-        }
-    </script>
-</body>
-</html>
+                    senderName: currentUser.displayName
